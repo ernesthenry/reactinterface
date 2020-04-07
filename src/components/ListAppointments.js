@@ -3,7 +3,11 @@ import React , { Component } from 'react'
 
 class ListAppointments extends Component{
     render(){
-        return <div>List----Appointments</div>
+        const listItems = this.props.appointments.map(item => (
+            <div>{item.petName}</div>
+      
+          ))
+        return <div>{listItems}</div>
     }
 }
 
