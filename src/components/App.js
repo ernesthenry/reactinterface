@@ -13,7 +13,7 @@ class App extends React.Component {
       myAppointments: [],
       orderBy: "petName",
       orderDir:"asc",
-      query: '',
+      queryText: '',
       formDisplay: false,
       lastIndex: 0
     }
@@ -21,7 +21,13 @@ class App extends React.Component {
     this.toggleForm = this.toggleForm.bind(this)
     this.addAppointment = this.addAppointment.bind(this)
     this.changeOrder = this.changeOrder.bind(this)
+    this.searchApts = this.searchApts.bind(this)
+  }
 
+  searchApts(query){
+    this.setState({
+      query: query
+    })
   }
 
   changeOrder(order, dir){
@@ -93,13 +99,13 @@ class App extends React.Component {
       return(
         eachItem['petName']
         .toLowerCase()
-        .includes(this.state.query.toLowerCase()) ||
+        .includes(this.state.queryText.toLowerCase()) ||
         eachItem['ownerName']
         .toLowerCase()
-        .includes(this.state.query.toLowerCase()) ||
+        .includes(this.state.queryText.toLowerCase()) ||
         eachItem['aptNotes']
         .toLowerCase()
-        .includes(this.state.query.toLowerCase()) 
+        .includes(this.state.queryText.toLowerCase()) 
       )
     })
    
@@ -117,7 +123,8 @@ class App extends React.Component {
                 <SearchAppointments 
                 orderBy={this.state.orderBy}
                 orderDir={this.state.orderDir}
-                changeOrder={this.changeOrder}  
+                changeOrder={this.changeOrder}
+                searchApts={this.searchApts}  
                 />
                 <ListAppointments appointments={filteredApts}
                 deleteAppointment={this.deleteAppointment}
