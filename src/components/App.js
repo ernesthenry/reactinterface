@@ -13,6 +13,7 @@ class App extends React.Component {
       myAppointments: [],
       orderBy: "petName",
       orderDir:"asc",
+      query: '',
       formDisplay: false,
       lastIndex: 0
     }
@@ -79,7 +80,7 @@ class App extends React.Component {
       order=-1
     }
 
-    filteredApts.sort((a,b) => {
+    filteredApts = filteredApts.sort((a,b) => {
       if(a[this.state.orderBy].toLowerCase() <
       b[this.state.orderBy].toLowerCase()
       ){
@@ -88,6 +89,18 @@ class App extends React.Component {
       else{
         return 1 * order
       }
+    }).filter(eachItem => {
+      return(
+        eachItem['petName']
+        .toLowerCase()
+        .includes(this.state.query.toLowerCase()) ||
+        eachItem['ownerName']
+        .toLowerCase()
+        .includes(this.state.query.toLowerCase()) ||
+        eachItem['aptNotes']
+        .toLowerCase()
+        .includes(this.state.query.toLowerCase()) 
+      )
     })
    
     return (
