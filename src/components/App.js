@@ -39,7 +39,7 @@ class App extends React.Component {
 
   searchApts(query){
     this.setState({
-      query: query
+      queryText: query
     })
   }
 
